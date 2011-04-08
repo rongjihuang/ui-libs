@@ -71,12 +71,15 @@ this.nbl = {
 	a: function(u,l) {
 		var s, t, m = this, n = u[0].replace(/.+\/|\.min\.js|\.js|\?.+|\W/g, ''), k = {js: {t: "script", a: "src"}, css: {t: "link", a: "href", r: "stylesheet"}, "i": {t: "img", a: "src"}}; // Clean up the name of the script for storage in the queue
 		t = u[0].match(/\.(js|css).*$/i); t = (t) ? t[1] : "i";
+		if(m.q[n] === true) return;//避免重复加载和解析
 		s = m.q[n] = m.c.createElement(k[t].t);
 		s.setAttribute(k[t].a, u[0]);
 		// Fix: CSS links do not fire onload events - Richard Lopes
 		// Images do. Limitation: no callback function possible after CSS loads
-		if (k[t].r) s.setAttribute("rel", k[t].r);
-		else {
+		if (k[t].r){
+			s.setAttribute("rel", k[t].r);
+			m.q[n] = true;//强制设为true
+		}else {
 			// When this script completes loading, it will trigger a callback function consisting of two things:
 			// 1. It will call nbl.l() with the remaining items in u[1] (if there are any)
 			// 2. It will execute the function l (if it is a function)
