@@ -60,7 +60,7 @@ $.fn.themeswitcher = function(settings){
 	
 	function buildThemeLI(themeName,label,icon){
 		label = kv[themeName] || label;
-		return '<li><a href="'+RP+'/ui-libs/jquery-ui/1.8.11/themes/'+themeName+'/jquery.ui.theme.css">'+
+		return '<li><a name="'+themeName+'" href="'+RP+'/ui-libs/jquery-ui/1.8.11/themes/'+themeName+'/jquery.ui.theme.css">'+
 		'<img src="'+RP+'/ui-libs/jquery-ui/themeSwitcher/images/'+icon+'" alt="'+label+'" title="'+label+'" />'+
 		'<span class="themeName">'+label+'</span></a></li>';
 	}	
@@ -119,8 +119,9 @@ $.fn.themeswitcher = function(settings){
 	---------------------------------------------------------------------*/
 	switcherpane.find('a').click(function(){
 		updateCSS( $(this).attr('href') );
-		var themeName = $(this).find('span').text();
-		button.find('.jquery-ui-themeswitcher-title').text( options.buttonPreText + themeName );
+		var themeName = $(this).attr("name");
+		button.find('.jquery-ui-themeswitcher-title').text( options.buttonPreText + $(this).find("span").text() );
+		//alert("set themeName=" + themeName);
 		$.cookie(options.cookieName, themeName);
 		options.onSelect();
 		if(options.closeOnSelect && switcherpane.is(':visible')){ switcherpane.spHide(); }
@@ -129,13 +130,21 @@ $.fn.themeswitcher = function(settings){
 	
 	//function to append a new theme stylesheet with the new style changes
 	function updateCSS(locStr){
-		var cssLink = $('<link href="'+locStr+'" type="text/css" rel="Stylesheet" class="ui-theme" />');
-		$("head").append(cssLink);
+		//这个代码在ie8不行
+		//var cssLink = $('<link href="'+locStr+'" type="text/css" rel="stylesheet"/>');//? i thing it's jquery bug
+		//$("head").append(cssLink);
 		
-		
-		if( $("link.ui-theme").size() > 3){
+		//以下代码各浏览器通用
+		var link=document.createElement("link");
+		link.setAttribute("type","text/css");
+		link.setAttribute("rel","stylesheet");
+		link.setAttribute("href",locStr);
+		link.setAttribute("class","ui-theme");
+		document.getElementsByTagName("head")[0].appendChild(link);
+
+		if( $("link.ui-theme").size() > 1){
 			$("link.ui-theme:first").remove();
-		}	
+		}
 	}	
 	
 	/* Inline CSS 
@@ -265,7 +274,7 @@ $.fn.themeswitcher = function(settings){
 	switcherpane.hide();
 	if( $.cookie(options.cookieName) || options.loadTheme ){
 		var themeName = $.cookie(options.cookieName) || options.loadTheme;
-		switcherpane.find('a:contains('+ themeName +')').trigger('click');
+		switcherpane.find('a[name="'+ themeName +'"]').trigger('click');
 	}
 
 	return this;
