@@ -69,6 +69,7 @@ function Menu(caller, options){
 		topLinkText: 'All',
 		nextCrumbLink: 'ui-icon-carat-1-e'	
 	}, options);
+	this.options = options;
 	
 	var killAllMenus = function(){
 		$.each(allUIMenus, function(i){
@@ -245,7 +246,10 @@ function Menu(caller, options){
 		menu.kill();
 		// edit this for your own custom function/callback:
 		$('#menuSelection').text($(item).text());	
-		location.href = $(item).attr('href');
+		//location.href = $(item).attr('href');
+		if(typeof this.options.clickMenuItem == "function"){
+			this.options.clickMenuItem.call(item, $(item).text(), $(item).attr('href'));
+		}
 	};
 };
 
