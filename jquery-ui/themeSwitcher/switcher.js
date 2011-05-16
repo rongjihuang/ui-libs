@@ -9,21 +9,10 @@
 
 /* jQuery plugin themeswitcher
 ---------------------------------------------------------------------*/
+//jQuery(function($){
 $.fn.themeswitcher = function(settings){
-	var options = jQuery.extend({
-		loadTheme: null,
-		initialText: '选择主题',
-		width: 150,
-		height: 200,
-		buttonPreText: '主题: ',
-		closeOnSelect: true,
-		buttonHeight: 14,
-		cookieName: 'jquery-ui-theme',
-		onOpen: function(){},
-		onClose: function(){},
-		onSelect: function(){},
-		root:''
-	}, settings);
+	var options = jQuery.extend($.fn.themeswitcher.defaultOptions, settings);
+	//this.options = options;
 
 	//markup 
 	var button = $('<a href="#" class="jquery-ui-themeswitcher-trigger">'
@@ -32,68 +21,32 @@ $.fn.themeswitcher = function(settings){
 			+ options.initialText +'</span></a>');
 	var RP=options.root;
 	
-	var kv=[];
-	kv["ui-lightness"]="明 亮";
-	kv["ui-darkness"]="黑 暗";
-	kv["smoothness"]="平 滑";
-	kv["start"]="起 点";
-	kv["redmond"]="雷德蒙";
-	kv["sunny"]="阳 光";
-	kv["overcast"]="阴 天";
-	kv["le-frog"]="老实的青蛙";
-	kv["flick"]="浪 漫";
-	//kv["pepper-grinder"]="";
-	kv["eggplant"]="茄 子";
-	kv["dark-hive"]="黑蜂窝";
-	//kv["cupertino"]="";
-	kv["south-street"]="南 街";
-	kv["blitzer"]="闪 电";
-	kv["humanity"]="仁 慈";
-	//kv["hot-sneaks"]="溜得快";
-	kv["excite-bike"]="刺激的自行车";
-	kv["vader"]="维 达";
-	kv["dot-luv"]="点 爱";
-	kv["mint-choc"]="薄荷巧克力";
-	kv["black-tie"]="黑领带";
-	//kv["trontastic"]="";
-	kv["swanky-purse"]="时髦包包";
+	var kv=options.regional;
 	
-	function buildThemeLI(themeName,label,icon){
+	function buildThemeLI(themeName,label,icon,extra){
 		label = kv[themeName] || label;
-		return '<li><a name="'+themeName+'" href="'+RP+'/ui-libs/jquery-ui/1.8.11/themes/'+themeName+'/jquery.ui.theme.css">'+
-		'<img src="'+RP+'/ui-libs/jquery-ui/themeSwitcher/images/'+icon+'" alt="'+label+'" title="'+label+'" />'+
-		'<span class="themeName">'+label+'</span></a></li>';
+		var html =[];
+		panel.push('<li><a name="'+themeName+'" href="'+RP+'/ui-libs/jquery-ui/1.8.11/themes/'+themeName+'/jquery.ui.theme.css"');
+		if(extra)
+			panel.push(' extra="' + extra + '"');
+		panel.push('>');
+		panel.push('<img src="'+RP+'/ui-libs/jquery-ui/themeSwitcher/images/'+icon+'" alt="'+label+'" title="'+label+'" />');
+		panel.push('<span class="themeName">'+label+'</span></a></li>');
+		return html.join("");
 	}	
-	var switcherpane = $('<div class="jquery-ui-themeswitcher">'+
-		'<div id="themeGallery">'+
-		'<ul>'+
-			[buildThemeLI("ui-lightness","UI lightness","theme_90_ui_light.png"),
-			 buildThemeLI("ui-darkness","UI Darkness","theme_90_ui_dark.png"),
-			 buildThemeLI("smoothness","Smoothness","theme_90_smoothness.png"),
-			 buildThemeLI("start","Start","theme_90_start_menu.png"),
-			 buildThemeLI("redmond","Redmond","theme_90_windoze.png"),
-			 buildThemeLI("sunny","Sunny","theme_90_sunny.png"),
-			 buildThemeLI("overcast","Overcast","theme_90_overcast.png"),
-			 buildThemeLI("le-frog","Le Frog","theme_90_le_frog.png"),
-			 buildThemeLI("flick","Flick","theme_90_flick.png"),
-			 buildThemeLI("pepper-grinder","Pepper Grinder","theme_90_pepper_grinder.png"),
-			 buildThemeLI("eggplant","Eggplant","theme_90_eggplant.png"),
-			 buildThemeLI("dark-hive","Dark Hive","theme_90_dark_hive.png"),
-			 buildThemeLI("cupertino","Cupertino","theme_90_cupertino.png"),
-			 buildThemeLI("south-street","South Street","theme_90_south_street.png"),
-			 buildThemeLI("blitzer","Blitzer","theme_90_blitzer.png"),
-			 buildThemeLI("humanity","Humanity","theme_90_hot_sneaks.png"),
-			 buildThemeLI("hot-sneaks","Hot Sneaks","theme_90_hot_sneaks.png"),
-			 buildThemeLI("excite-bike","Excite Bike","theme_90_excite_bike.png"),
-			 buildThemeLI("vader","Vader","theme_90_black_matte.png"),
-			 buildThemeLI("dot-luv","Dot Luv","theme_90_dot_luv.png"),
-			 buildThemeLI("mint-choc","Mint Choc","theme_90_mint_choco.png"),
-			 buildThemeLI("black-tie","Black Tie","theme_90_black_tie.png"),
-			 buildThemeLI("trontastic","Trontastic","theme_90_trontastic.png"),
-			 buildThemeLI("swanky-purse","Swanky Purse","theme_90_swanky_purse.png")
-			].join("")+
-		'</ul>'+
-		'</div></div>').find('div').removeAttr('id');
+	var panel =[];
+	panel.push('<div class="jquery-ui-themeswitcher">');
+	panel.push('<div id="themeGallery">');
+	panel.push('<ul>');
+	var theme;
+	for(var i=0;i<options.themes.length;i++){
+		//{name: "ui-lightness",label: "UI lightness",iconImg:"theme_90_ui_light.png",extra:"/bc/extra1.css,/bc/extra2.css"}
+		theme = options.themes[i];
+		panel.push(buildThemeLI(theme["name"],theme["label"],theme["iconImg"],theme["extra"]));
+	}
+	panel.push('</ul>');
+	panel.push('</div></div>');
+	var switcherpane = $(panel.join("")).find('div').removeAttr('id');
 	
 	//button events
 	button.click(
@@ -118,7 +71,7 @@ $.fn.themeswitcher = function(settings){
 	/* Theme Loading
 	---------------------------------------------------------------------*/
 	switcherpane.find('a').click(function(){
-		updateCSS( $(this).attr('href') );
+		updateCSS( $(this).attr('href'),$(this).attr('extra') );
 		var themeName = $(this).attr("name");
 		button.find('.jquery-ui-themeswitcher-title').text( options.buttonPreText + $(this).find("span").text() );
 		//alert("set themeName=" + themeName);
@@ -129,18 +82,33 @@ $.fn.themeswitcher = function(settings){
 	});
 	
 	//function to append a new theme stylesheet with the new style changes
-	function updateCSS(locStr){
+	function updateCSS(locStr,extra){
 		//这个代码在ie8不行
 		//var cssLink = $('<link href="'+locStr+'" type="text/css" rel="stylesheet"/>');//? i thing it's jquery bug
 		//$("head").append(cssLink);
 		
 		//以下代码各浏览器通用
+		//--添加jquery-ui的样式文件
 		var link=document.createElement("link");
 		link.setAttribute("type","text/css");
 		link.setAttribute("rel","stylesheet");
-		link.setAttribute("href",locStr);
+		link.setAttribute("href",locStr + (locStr.indexOf("?") != -1 ? "&" : "?") + "version=" + $.fn.themeswitcher.ts);
 		link.setAttribute("class","ui-theme");
-		document.getElementsByTagName("head")[0].appendChild(link);
+		var head = document.getElementsByTagName("head")[0];
+		head.appendChild(link);
+		
+		//--添加额外的css文件
+		if(extra && extra.length >0){
+			extra = extra.split(",");
+			for(var i=0;i<extra.length;i++){
+				link=document.createElement("link");
+				link.setAttribute("type","text/css");
+				link.setAttribute("rel","stylesheet");
+				link.setAttribute("href",extra[i] + (extra[i].indexOf("?") != -1 ? "&" : "?") + "version=" + $.fn.themeswitcher.ts);
+				link.setAttribute("class","ui-theme-extra");
+				head.appendChild(link);
+			}
+		}
 
 		if( $("link.ui-theme").size() > 1){
 			$("link.ui-theme:first").remove();
@@ -280,8 +248,87 @@ $.fn.themeswitcher = function(settings){
 	return this;
 };
 
+$.fn.themeswitcher.regional=[];
+$.fn.themeswitcher.regional['zh-CN']={
+	"ui-lightness": "明 亮",
+	"ui-darkness": "黑 暗",
+	"smoothness": "平 滑",
+	"start": "起 点",
+	"redmond": "雷德蒙",
+	"sunny": "阳 光",
+	"overcast": "阴 天",
+	"le-frog": "老实的青蛙",
+	"flick": "浪 漫",
+	//"pepper-grinder":"",
+	"eggplant": "茄 子",
+	"dark-hive": "黑蜂窝",
+	//"cupertino": "",
+	"south-street": "南 街",
+	"blitzer": "闪 电",
+	"humanity": "仁 慈",
+	//"hot-sneaks": "溜得快",
+	"excite-bike": "刺激的自行车",
+	"vader": "维 达",
+	"dot-luv": "点 爱",
+	"mint-choc": "薄荷巧克力",
+	"black-tie": "黑领带",
+	//"trontastic": "",
+	"swanky-purse": "时髦包包",
+};
+/**时间搓*/
+$.fn.themeswitcher.ts="20110515";
+/**默认的主题
+ * 格式：{name: "...",label: "...",iconImg:"x.png",extra:"x1.css,x2.css"}
+ * name:样式所在文件夹的名称
+ * label:界面显示的名称
+ * iconImg:界面显示的图片
+ * extra：额外附件的css文件，多个文件用逗号连接
+ */
+$.fn.themeswitcher.defaultThemes=[
+	 {name: "ui-lightness",label: "UI lightness",iconImg:"theme_90_ui_light.png"}
+	,{name: "ui-darkness",label: "UI Darkness",iconImg:"theme_90_ui_dark.png"}
+	,{name: "smoothness",label: "Smoothness",iconImg:"theme_90_smoothness.png"}
+	,{name: "start",label: "Start",iconImg:"theme_90_start_menu.png"}
+	,{name: "redmond",label: "Redmond",iconImg:"theme_90_windoze.png"}
+	,{name: "sunny",label: "Sunny",iconImg:"theme_90_sunny.png"}
+	,{name: "overcast",label: "Overcast",iconImg:"theme_90_overcast.png"}
+	,{name: "le-frog",label: "Le Frog",iconImg:"theme_90_le_frog.png"}
+	,{name: "flick",label: "Flick",iconImg:"theme_90_flick.png"}
+	,{name: "pepper-grinder",label: "Pepper Grinder",iconImg:"theme_90_pepper_grinder.png"}
+	,{name: "eggplant",label: "Eggplant",iconImg:"theme_90_eggplant.png"}
+	,{name: "dark-hive",label: "Dark Hive",iconImg:"theme_90_dark_hive.png"}
+	,{name: "cupertino",label: "Cupertino",iconImg:"theme_90_cupertino.png"}
+	,{name: "south-street",label: "South Street",iconImg:"theme_90_south_street.png"}
+	,{name: "blitzer",label: "Blitzer",iconImg:"theme_90_blitzer.png"}
+	,{name: "humanity",label: "Humanity",iconImg:"theme_90_hot_sneaks.png"}
+	,{name: "hot-sneaks",label: "Hot Sneaks",iconImg:"theme_90_hot_sneaks.png"}
+	,{name: "excite-bike",label: "Excite Bike",iconImg:"theme_90_excite_bike.png"}
+	,{name: "vader",label: "Vader",iconImg:"theme_90_black_matte.png"}
+	,{name: "dot-luv",label: "Dot Luv",iconImg:"theme_90_dot_luv.png"}
+	,{name: "mint-choc",label: "Mint Choc",iconImg:"theme_90_mint_choco.png"}
+	,{name: "black-tie",label: "Black Tie",iconImg:"theme_90_black_tie.png"}
+	,{name: "trontastic",label: "Trontastic",iconImg:"theme_90_trontastic.png"}
+	,{name: "swanky-purse",label: "Swanky Purse",iconImg:"theme_90_swanky_purse.png"}
+];
 
-
+//默认的参数配置
+$.fn.themeswitcher.defaultOptions={
+	loadTheme: null,
+	initialText: '选择主题',
+	width: 150,
+	height: 200,
+	buttonPreText: '主题: ',
+	closeOnSelect: true,
+	buttonHeight: 14,
+	cookieName: 'jquery-ui-theme',
+	onOpen: function(){},
+	onClose: function(){},
+	onSelect: function(){},
+	regional: $.fn.themeswitcher.regional['zh-CN'],
+	themes: $.fn.themeswitcher.defaultThemes,
+	root:''
+};
+//});
 
 /**
  * Cookie plugin
