@@ -254,22 +254,22 @@ $.fn.themeswitcher.regional['zh-CN']={
 	"ui-darkness": "黑 暗",
 	"smoothness": "平 滑",
 	"start": "起 点",
-	"redmond": "雷德蒙",
-	"sunny": "阳 光",
+	"redmond": "微软",
+	"sunny": "晴 天",
 	"overcast": "阴 天",
 	"le-frog": "老实的青蛙",
-	"flick": "浪 漫",
+	"flick": "轻 弹",
 	//"pepper-grinder":"",
 	"eggplant": "茄 子",
 	"dark-hive": "黑蜂窝",
-	//"cupertino": "",
-	"south-street": "南 街",
-	"blitzer": "闪 电",
+	"cupertino": "苹果",
+	"south-street": "南路边",
+	"blitzer": "布雷泽",
 	"humanity": "仁 慈",
-	//"hot-sneaks": "溜得快",
+	"hot-sneaks": "猛蛇",
 	"excite-bike": "刺激的自行车",
 	"vader": "维 达",
-	"dot-luv": "点 爱",
+	"dot-luv": "斑点",
 	"mint-choc": "薄荷巧克力",
 	"black-tie": "黑领带",
 	//"trontastic": "",
@@ -300,7 +300,7 @@ $.fn.themeswitcher.defaultThemes=[
 	,{name: "cupertino",label: "Cupertino",iconImg:"theme_90_cupertino.png"}
 	,{name: "south-street",label: "South Street",iconImg:"theme_90_south_street.png"}
 	,{name: "blitzer",label: "Blitzer",iconImg:"theme_90_blitzer.png"}
-	,{name: "humanity",label: "Humanity",iconImg:"theme_90_hot_sneaks.png"}
+	,{name: "humanity",label: "Humanity",iconImg:"theme_90_humanity.png"}
 	,{name: "hot-sneaks",label: "Hot Sneaks",iconImg:"theme_90_hot_sneaks.png"}
 	,{name: "excite-bike",label: "Excite Bike",iconImg:"theme_90_excite_bike.png"}
 	,{name: "vader",label: "Vader",iconImg:"theme_90_black_matte.png"}
