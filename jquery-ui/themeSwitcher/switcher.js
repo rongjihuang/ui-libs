@@ -26,7 +26,7 @@ $.fn.themeswitcher = function(settings){
 	function buildThemeLI(themeName,label,icon,extra){
 		label = kv[themeName] || label;
 		var html =[];
-		panel.push('<li><a name="'+themeName+'" href="'+RP+'/ui-libs/jquery-ui/1.8.11/themes/'+themeName+'/jquery.ui.theme.css"');
+		panel.push('<li><a name="'+themeName+'" href="'+RP+'/ui-libs/jquery-ui/'+options.uiversion+'/themes/'+themeName+'/jquery.ui.theme.css"');
 		if(extra)
 			panel.push(' extra="' + extra + '"');
 		panel.push('>');
@@ -326,6 +326,7 @@ $.fn.themeswitcher.defaultOptions={
 	onSelect: function(){},
 	regional: $.fn.themeswitcher.regional['zh-CN'],
 	themes: $.fn.themeswitcher.defaultThemes,
+	uiversion: "1.8.11",
 	root:''
 };
 //});
