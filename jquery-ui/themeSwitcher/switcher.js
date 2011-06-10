@@ -326,7 +326,7 @@ $.fn.themeswitcher.defaultOptions={
 	onSelect: function(){},
 	regional: $.fn.themeswitcher.regional['zh-CN'],
 	themes: $.fn.themeswitcher.defaultThemes,
-	uiversion: "1.8.11",
+	uiversion: "1.8.13",
 	root:''
 };
 //});
