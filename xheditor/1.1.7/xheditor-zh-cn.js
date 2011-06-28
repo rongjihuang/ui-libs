@@ -1546,7 +1546,7 @@ $.xheditor=function(textarea,options)
 			else onProgress(-1);//不支持进度
 			xhr.open("POST", toUrl);
 			xhr.setRequestHeader('Content-Type', 'application/octet-stream');
-			xhr.setRequestHeader('Content-Disposition', 'attachment; name="'+inputname+'"; filename="'+fromfile.fileName+'"');
+			xhr.setRequestHeader('Content-Disposition', 'attachment; name="'+inputname+'"; filename="'+encodeURIComponent(fromfile.fileName)+'"');
 			if(xhr.sendAsBinary)xhr.sendAsBinary(fromfile.getAsBinary());
 			else xhr.send(fromfile);
 		}
