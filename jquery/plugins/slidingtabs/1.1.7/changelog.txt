@@ -1,0 +1,101 @@
+Sliding Tabs Changelog
+----------------------
+
+v1.1.7 - 31. August 2011
+
+	* The tabs can now have dynamic (%) width.
+	* Improved the CSS, making it easier to change the dimensions of the tabs.
+
+
+v1.1.6 - 20. July 2011
+	
+	* You can now easily change the tabs alignment by adding a class to the main container.	
+	* Added option to stop autoplay when a tab is clicked.
+	* Added a second fade transition.
+ 
+
+v1.1.5 - 22. June 2011
+	
+	* Added options to set the total width and height of the tabs layout.
+	* The slideLength option is now set automatically, but can still be entered manually if needed.
+          
+         
+v1.1.4 - 23. May 2011
+	
+	* Added option to switch the directional buttons function. The buttons can now either slide or click through the tabs.
+	* Improved the CSS structure.
+
+
+v1.1.3 - 20. May 2011
+	
+	* Added support for external linking to tabs. Any tab can now be opened from an external link or the URL.
+
+
+v1.1.2 - 16. May 2011
+	
+	* Fixed a compatibility issue with jQuery 1.6. 
+
+
+v1.1.1 - 18. April 2011 
+
+	* Improved the CSS selector naming.
+        * Changed some ID's to classes to avoid duplicate ID's when using multiple instances.
+
+
+v1.1.0 - 28. Mars 2011
+
+	* Added an autoplay option. Intervals can be set with the autoplayInterval option (in milliseconds). 
+
+
+v1.0.9 - 15. February 2011
+
+	* Added option to save the 'active' tab state. If a user navigates away and back to the tabs page again, the last tab clicked will still be selected.
+         
+
+v1.0.8 - 2. February 2011
+	
+	* Refactored parts of the code.
+ 
+
+v1.0.7 - 31. January 2011
+
+	* Improved the content sliding function. The sliding direction now changes depending on the clicked tab's order.
+	* Refactored some of the code.
+
+
+v1.0.6 - 19. January 2011
+	
+	* Fixed a bug preventing the tabs from sliding when another animation is running.
+
+
+v1.0.5 - 12. January 2011
+
+	* Fixed a compatibility issue with jQuery 1.3.
+
+
+v1.0.4 - 27. December 2010
+
+	* Added option to auto adjust the content's height. You can also specify a animation time for when the container resizes to fit the content's height.
+
+
+v1.0.3 - 14. December 2010
+
+	* Improved the offset functionality. You can now set a offset value for each sliding direction (up, down, left and right).
+	只能在低于jquery1.5的版本运行，1.6版测试没通过（切换页签内容无法滑动出来）
+
+
+v1.0.2 - 8. December 2010
+	
+	* Fixed a CSS bug with the vertical tabs.
+
+
+v1.0.1 - 30. November 2010
+	
+	* Added option to change the tab class.
+	* Changed the tab 'href' and tab view ID names.		
+	* Using the tab's URL hash instead of the ID attribute to display content.  
+
+
+v1.0 - 29. November 2010
+
+	* Sliding Tabs jQuery plugin released.
