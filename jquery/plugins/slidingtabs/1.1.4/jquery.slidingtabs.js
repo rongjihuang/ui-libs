@@ -127,6 +127,8 @@
 				$tab = $activeTab;
 				$activeTab = $activeTab.parent('li');				
 			
+				console.log("$tabs:" + $tabs.size());
+				console.log("$lastElem:" + $lastElem.size());
 				if (($lastElem[val.func](true) + $lastElem.position()[val.obj]) > conf.slideLength) {					
 					// Get the values needed to get the total width/height of the tabs
 					val.elemD = $activeTab[val.func](true);
