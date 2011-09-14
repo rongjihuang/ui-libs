@@ -165,11 +165,15 @@
 				val.activeElemP = $activeTab.position();								
 				
 				// Slide partially hidden tab into view
-				tabs.slideClicked(val);												
+				tabs.slideClicked(val);	
+				
+				// Get the clicked tab's hash value
+				val.hash = this.getHash($tab);
+				//logger.info("hash=" + val.hash);
 											
 				// Set the content vars and remove/add the active class
 				$activeView = $content.children('div.'+conf.viewActiveClass).removeClass(conf.viewActiveClass);				
-				$view = $content.children('div#'+$tab.attr('hash')).addClass(conf.viewActiveClass);																							
+				$view = $content.children('div'+val.hash).addClass(conf.viewActiveClass);																							
 								
 				if (conf.autoHeight == true) { content.adjustHeight(); }								
 				
@@ -179,6 +183,13 @@
 				} else {
 					$activeView.hide();	$view.show();		
 				}								
+			},
+			getHash: function($tab) {
+				// Get the tab's hash value				
+				val.hash = $tab.attr('hash');
+								
+				if (val.hash) {	return val.hash; } 
+				else { return $tab.prop('hash'); }								
 			},
 			
 			getActive: function() {																								
