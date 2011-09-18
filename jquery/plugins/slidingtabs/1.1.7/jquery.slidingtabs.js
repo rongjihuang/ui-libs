@@ -9,8 +9,8 @@
  *
  */
 (function($) {
-	$.fn.slideTabs = function(b) {
-		var c = {
+	$.fn.slideTabs = function(option) {
+		var defaultOption = {
 			autoplay : false,
 			autoplayClickStop : false,
 			autoplayInterval : 4000,
@@ -30,7 +30,7 @@
 			classViewContainer : 'st_view_container',
 			contentAnim : 'slideH',
 			contentAnimTime : 600,
-			contentEasing : 'easeInOutExpo',
+			contentEasing : 'easeInOutExpo',// 'easeOutBounce',
 			offsetBR : 0,
 			offsetTL : 0,
 			orientation : 'horizontal',
@@ -42,31 +42,35 @@
 			totalHeight : '',
 			totalWidth : '',
 			urlLinking : true
-		}, conf = $.extend(true, {}, c, b);
+		};
+		var conf = $.extend(true, {}, defaultOption, option);
 		return this.each(function() {
 			var a = new SlideTabs($(this), conf);
-			a.init()
+			a.init();
 		})
 	};
-	function SlideTabs(d, e) {
-		var f = d.find('.' + e.classTabsContainer), $tabsInnerCont = f
-				.children('div').first(), $tabs = f.find('.' + e.classTabsList), $a = $tabs
-				.children('li').find('a'), $contentCont = d.find('.'
-				+ e.classViewContainer), $content = $contentCont.find('.'
-				+ e.classView), $prev = d.find('.' + e.classBtnPrev).click(
-				function() {
-					tabs[e.buttonsFunction + 'Prev'](val);
-					return false
-				}), $next = d.find('.' + e.classBtnNext).click(function() {
-			tabs[e.buttonsFunction + 'Next'](val);
-			return false
-		}), $tab, $activeTab = [], $li, $lastElem, $view, $activeView, val = {}, margin = 0;
+	function SlideTabs(d, option) {
+		var f = d.find('.' + option.classTabsContainer);
+		var $tabsInnerCont = f.children('div').first();
+		var $tabs = f.find('.' + option.classTabsList);
+		var $a = $tabs.children('li').find('a');
+		var $contentCont = d.find('.' + option.classViewContainer);
+		var $content = $contentCont.find('.' + option.classView);
+		var $prev = d.find('.' + option.classBtnPrev).click(function() {
+			tabs[option.buttonsFunction + 'Prev'](val);
+			return false;
+		});
+		var $next = d.find('.' + option.classBtnNext).click(function() {
+			tabs[option.buttonsFunction + 'Next'](val);
+			return false;
+		});
+		var $tab, $activeTab = [], $li, $lastElem, $view, $activeView, val = {}, margin = 0;
 		this.init = function() {
-			if (e.orientation == 'horizontal') {
+			if (option.orientation == 'horizontal') {
 				$tabsInnerCont.css('overflow', 'hidden');
 				val.func = 'outerWidth';
 				val.obj = 'left';
-				val.attr = 'marginLeft'
+				val.attr = 'marginLeft';
 			} else {
 				val.func = 'outerHeight';
 				val.obj = 'top';
@@ -74,86 +78,87 @@
 				val.prevBtnH = $prev.outerHeight();
 				val.nextBtnH = $next.outerHeight();
 				(val.prevBtnH >= val.nextBtnH) ? val.buttonsH = val.prevBtnH
-						: val.buttonsH = val.nextBtnH
+						: val.buttonsH = val.nextBtnH;
 			}
-			if (e.totalWidth.length > 0) {
-				g.width()
+			if (option.totalWidth.length > 0) {
+				g.width();
 			}
-			if (e.totalHeight.length > 0) {
-				g.height()
+			if (option.totalHeight.length > 0) {
+				g.height();
 			}
 			tabs.init();
-			if (e.autoplay == true) {
-				autoplay.init()
+			if (option.autoplay == true) {
+				autoplay.init();
 			}
 		};
 		var g = {
 			width : function() {
-				if (e.totalWidth == 'auto') {
-					d.css('width', '100%')
+				if (option.totalWidth == 'auto') {
+					d.css('width', '100%');
 				} else {
-					d.css('width', e.totalWidth + 'px')
+					d.css('width', option.totalWidth + 'px');
 				}
 			},
 			height : function() {
 				var a = ($contentCont.outerHeight(true) - $contentCont.height());
-				if (e.orientation == 'vertical') {
+				if (option.orientation == 'vertical') {
 					var b = (f.outerHeight() - f.height());
-					f.css('height', (e.totalHeight - b) + 'px');
-					$contentCont.css('height', (e.totalHeight - a) + 'px')
+					f.css('height', (option.totalHeight - b) + 'px');
+					$contentCont.css('height', (option.totalHeight - a) + 'px');
 				} else {
-					$contentCont.css('height', (e.totalHeight - (f
+					$contentCont.css('height', (option.totalHeight - (f
 							.outerHeight(true) + a))
-							+ 'px')
+							+ 'px');
 				}
 			}
-		}, tabs = {
-			animated : '#' + d.attr('id') + ' .' + e.classTabsList
+		};
+		var tabs = {
+			animated : '#' + d.attr('id') + ' .' + option.classTabsList
 					+ ':animated',
 			init : function() {
 				this.setSlideLength();
 				this.posActive();
-				this.bind()
+				this.bind();
 			},
 			setSlideLength : function() {
-				if (e.tabsSlideLength == 0) {
-					if (e.orientation == 'horizontal') {
-						val.tabsSlideLength = $tabsInnerCont.width()
+				if (option.tabsSlideLength == 0) {
+					if (option.orientation == 'horizontal') {
+						val.tabsSlideLength = $tabsInnerCont.width();
 					} else {
-						val.tabsSlideLength = (f.height() - val.buttonsH)
+						val.tabsSlideLength = (f.height() - val.buttonsH);
 					}
 				} else {
-					val.tabsSlideLength = e.tabsSlideLength
+					val.tabsSlideLength = option.tabsSlideLength;
 				}
 			},
 			bind : function() {
-				if (e.totalWidth == 'auto') {
+				if (option.totalWidth == 'auto') {
 					var c = null;
 					$(window).resize(function() {
 						if (c) {
-							clearTimeout(c)
+							clearTimeout(c);
 						}
 						c = setTimeout(function() {
-							if (e.orientation == 'horizontal') {
+							if (option.orientation == 'horizontal') {
 								tabs.setAutoWidth()
 							}
-							if (e.autoHeight == true) {
+							if (option.autoHeight == true) {
 								content.adjustHeight()
 							}
-						}, 100)
-					})
+						}, 100);
+					});
 				}
-				$tabs.delegate('li a.' + e.classTab, 'click', function() {
+				$tabs.delegate('li a.' + option.classTab, 'click', function() {
 					tabs.click(this, true);
-					return false
+					return false;
 				});
-				if ($.fn.mousewheel && e.tabsScroll == true) {
+				if ($.fn.mousewheel && option.tabsScroll == true) {
 					$tabs.mousewheel(function(a, b) {
 						(b > 0) ? tabs.slidePrev(val) : tabs.slideNext(val);
-						return false
-					})
+						return false;
+					});
 				}
-				$('a.' + e.classExtLink).each(
+				$('a.' + option.classExtLink).each(
 						function() {
 							if ($(this).attr('rel') == d.attr('id')) {
 								$(this).click(
@@ -161,10 +166,10 @@
 											$tab = tabs.findByRel($(this).attr(
 													'href').slice(1));
 											tabs.click($tab);
-											return false
-										})
+											return false;
+										});
 							}
-						})
+						});
 			},
 			setAutoWidth : function() {
 				val.tabsSlideLength = $tabsInnerCont.width();
@@ -175,29 +180,30 @@
 					f.addClass('st_sliding_active');
 					val.tabsSlideLength = $tabsInnerCont.width();
 					tabs.initButtons();
-					tabs.showButtons()
+					tabs.showButtons();
 				} else {
-					if (-+margin < (0 + e.offsetBR)) {
+					if (-+margin < (0 + option.offsetBR)) {
 						if (a < $tabsInnerCont.width()) {
 							var b = (val.tabsSlideLength - a);
 							margin = (margin - b);
-							if ((margin + 1) < (buttonsW + e.offsetBR)) {
-								margin = (0 + e.offsetBR);
+							if ((margin + 1) < (buttonsW + option.offsetBR)) {
+								margin = (0 + option.offsetBR);
 								tabs.hideButtons();
-								val.tabsSlideLength = tabsContOW
+								val.tabsSlideLength = tabsContOW;
 							}
-							tabs.initButtons()
+							tabs.initButtons();
 						} else if (a <= (tabsContOW - margin)) {
-							margin = (0 + e.offsetBR);
+							margin = (0 + option.offsetBR);
 							tabs.hideButtons();
-							val.tabsSlideLength = tabsContOW
+							val.tabsSlideLength = tabsContOW;
 						}
 						$tabs.animate({
 							'marginLeft' : -+margin
-						}, 150)
-					} else if (margin == (0 + e.offsetBR) && a <= tabsContOW) {
+						}, 150);
+					} else if (margin == (0 + option.offsetBR)
+							&& a <= tabsContOW) {
 						tabs.hideButtons();
-						val.tabsSlideLength = tabsContOW
+						val.tabsSlideLength = tabsContOW;
 					}
 				}
 			},
@@ -214,157 +220,159 @@
 					val.elemP = $activeTab.position()[val.obj];
 					if (val.elemP > val.tabsSlideLength) {
 						margin += (val.elemD + (val.elemP - val.tabsSlideLength));
-						margin = (margin + e.offsetBR)
+						margin = (margin + option.offsetBR);
 					} else if ((val.elemP + val.elemD) > val.tabsSlideLength) {
 						margin += (val.elemD - (val.tabsSlideLength - val.elemP));
-						margin = (margin + e.offsetBR)
+						margin = (margin + option.offsetBR);
 					} else {
-						margin = (margin - e.offsetTL)
+						margin = (margin - option.offsetTL);
 					}
 					$tabs.css(val.attr, -+margin);
 					this.initButtons();
-					this.showButtons()
+					this.showButtons();
 				}
 			},
 			initButtons : function() {
-				if (e.buttonsFunction == 'slide') {
-					if ($tabs.children('li:first').position()[val.obj] == (0 + e.offsetTL)) {
-						this.disableButton($prev)
+				if (option.buttonsFunction == 'slide') {
+					if ($tabs.children('li:first').position()[val.obj] == (0 + option.offsetTL)) {
+						this.disableButton($prev);
 					} else {
-						this.enableButton($prev)
+						this.enableButton($prev);
 					}
 					if (($lastElem.position()[val.obj] + $lastElem[val.func]
-							(true)) <= (val.tabsSlideLength - e.offsetBR)) {
-						this.disableButton($next)
+							(true)) <= (val.tabsSlideLength - option.offsetBR)) {
+						this.disableButton($next);
 					} else {
-						this.enableButton($next)
+						this.enableButton($next);
 					}
 				} else {
-					this.setButtonState()
+					this.setButtonState();
 				}
 			},
 			enableButton : function(a) {
-				a.removeClass(e.classBtnDisabled)
+				a.removeClass(option.classBtnDisabled);
 			},
 			disableButton : function(a) {
-				a.addClass(e.classBtnDisabled)
+				a.addClass(option.classBtnDisabled);
 			},
 			showButtons : function() {
 				$prev.show();
-				$next.show()
+				$next.show();
 			},
 			hideButtons : function() {
 				f.removeClass('st_sliding_active');
 				$prev.hide();
-				$next.hide()
+				$next.hide();
 			},
 			click : function(a, b) {
 				if ($(content.animated).length) {
-					return false
+					return false;
 				}
 				$tab = $(a);
-				if ($tab.hasClass(e.classTabActive)) {
+				if ($tab.hasClass(option.classTabActive)) {
 					return false
 				}
 				$li = $tab.parents('li');
 				this.setActive();
-				if (e.autoplay == true) {
-					if (e.autoplayClickStop == true && b == true) {
-						e.autoplay = false;
-						autoplay.clearInterval()
+				if (option.autoplay == true) {
+					if (option.autoplayClickStop == true && b == true) {
+						option.autoplay = false;
+						autoplay.clearInterval();
 					} else {
 						val.index = $tab.parents('li').index();
-						autoplay.setInterval()
+						autoplay.setInterval();
 					}
 				}
 				val.elemP = $li.position();
 				val.activeElemP = $activeTab.position();
 				val.hash = this.getHash($tab);
 				this.slideClicked(val);
-				$activeView = $content.children('div.' + e.classViewActive)
-						.removeClass(e.classViewActive);
+				$activeView = $content
+						.children('div.' + option.classViewActive).removeClass(
+								option.classViewActive);
 				$view = $content.children('div#' + val.hash).addClass(
-						e.classViewActive);
-				if (e.autoHeight == true) {
-					content.adjustHeight()
+						option.classViewActive);
+				if (option.autoHeight == true) {
+					content.adjustHeight();
 				}
-				if (e.contentAnim.length > 0) {
-					content[e.contentAnim](val)
+				if (option.contentAnim.length > 0) {
+					content[option.contentAnim](val);
 				} else {
 					$activeView.hide();
-					$view.show()
+					$view.show();
 				}
 			},
 			clickPrev : function() {
 				if ($(content.animated).length) {
-					return false
+					return false;
 				}
 				val.$prevTab = this.find('prev');
 				if (val.$prevTab.length) {
-					this.click(val.$prevTab)
+					this.click(val.$prevTab);
 				}
 			},
 			clickNext : function() {
 				if ($(content.animated).length) {
-					return false
+					return false;
 				}
 				val.$nextTab = this.find('next');
 				if (val.$nextTab.length) {
-					this.click(val.$nextTab)
+					this.click(val.$nextTab);
 				}
 			},
 			find : function(a) {
-				return $tab.parents('li')[a]().find('a.' + e.classTab)
+				return $tab.parents('li')[a]().find('a.' + option.classTab);
 			},
 			findByRel : function(a) {
-				return $tabs.find('[rel=' + a + ']')
+				return $tabs.find('[rel=' + a + ']');
 			},
 			getHash : function(a) {
 				val.hash = a.attr('hash');
 				if (val.hash) {
-					return val.hash
+					return val.hash;
 				} else {
-					return a.prop('hash')
+					return a.prop('hash');
 				}
 			},
 			getActive : function() {
-				if (e.urlLinking == true && location.hash) {
-					$activeTab = this.findByRel(location.hash.slice(1))
+				if (option.urlLinking == true && location.hash) {
+					$activeTab = this.findByRel(location.hash.slice(1));
 				}
 				if (!$activeTab.length) {
 					if ($.cookie) {
-						var a = $.cookie(d.attr('id'))
+						var a = $.cookie(d.attr('id'));
 					}
 					if (a) {
 						this.removeActive();
-						$activeTab = $a.eq(a).addClass(e.classTabActive)
+						$activeTab = $a.eq(a).addClass(option.classTabActive);
 					} else {
 						$activeTab = $tabs.children('li').find(
-								'.' + e.classTabActive);
+								'.' + option.classTabActive);
 						if (!$activeTab.length) {
 							$activeTab = $tabs.find('a:first').addClass(
-									e.classTabActive)
+									option.classTabActive);
 						}
 					}
 				} else {
 					this.removeActive();
-					$activeTab.addClass(e.classTabActive)
+					$activeTab.addClass(option.classTabActive);
 				}
-				this.saveActive($activeTab)
+				this.saveActive($activeTab);
 			},
 			removeActive : function() {
-				$tabs.children('li').find('.' + e.classTabActive).removeClass(
-						e.classTabActive)
+				$tabs.children('li').find('.' + option.classTabActive)
+						.removeClass(option.classTabActive);
 			},
 			setActive : function() {
-				$activeTab = $tabs.children('li').find('a.' + e.classTabActive)
-						.removeClass(e.classTabActive);
-				$tab.addClass(e.classTabActive);
-				this.saveActive($tab)
+				$activeTab = $tabs.children('li').find(
+						'a.' + option.classTabActive).removeClass(
+						option.classTabActive);
+				$tab.addClass(option.classTabActive);
+				this.saveActive($tab);
 			},
 			saveActive : function(a) {
-				if (e.tabSaveState == true) {
-					$.cookie(d.attr('id'), a.parents('li').index())
+				if (option.tabSaveState == true) {
+					$.cookie(d.attr('id'), a.parents('li').index());
 				}
 			},
 			slideClicked : function(a) {
@@ -372,37 +380,37 @@
 				a.elemD = $li[a.func](true);
 				a.nextElemPos = ($li.next().length == 1) ? $li.next()
 						.position()[a.obj] : 0;
-				if (a.elemP < (0 + e.offsetTL)) {
+				if (a.elemP < (0 + option.offsetTL)) {
 					a.elemHidden = (a.elemD - a.nextElemPos);
-					margin = (margin - (a.elemHidden + e.offsetTL));
+					margin = (margin - (a.elemHidden + option.offsetTL));
 					this.enableButton($next)
-				} else if ((a.elemD + a.elemP) > (a.tabsSlideLength - e.offsetBR)) {
-					margin += (a.elemD - (a.tabsSlideLength - (a.elemP + e.offsetBR)));
-					this.enableButton($prev)
+				} else if ((a.elemD + a.elemP) > (a.tabsSlideLength - option.offsetBR)) {
+					margin += (a.elemD - (a.tabsSlideLength - (a.elemP + option.offsetBR)));
+					this.enableButton($prev);
 				}
 				this.animate();
-				this.setButtonState()
+				this.setButtonState();
 			},
 			slidePrev : function(a) {
 				if ($(tabs.animated).length) {
-					return false
+					return false;
 				}
 				$tabs.children('li').each(function() {
 					$li = $(this);
 					a.elemP = $li.position()[a.obj];
-					if (a.elemP >= (0 + e.offsetTL)) {
+					if (a.elemP >= (0 + option.offsetTL)) {
 						a.elemHidden = ($li.prev()[a.func](true) - a.elemP);
-						margin = ((margin - a.elemHidden) - e.offsetTL);
+						margin = ((margin - a.elemHidden) - option.offsetTL);
 						$li = $li.prev();
 						tabs.animate();
 						tabs.setButtonState($next);
-						return false
+						return false;
 					}
 				})
 			},
 			slideNext : function(a) {
 				if ($(tabs.animated).length) {
-					return false
+					return false;
 				}
 				$tabs
 						.children('li')
@@ -411,73 +419,74 @@
 									$li = $(this);
 									a.elemD = $li[a.func](true);
 									a.elemP = $li.position()[a.obj];
-									if ((a.elemD + a.elemP) > (a.tabsSlideLength - e.offsetBR)) {
+									if ((a.elemD + a.elemP) > (a.tabsSlideLength - option.offsetBR)) {
 										a.elemHidden = (a.tabsSlideLength - a.elemP);
-										margin += ((a.elemD - a.elemHidden) + e.offsetBR);
+										margin += ((a.elemD - a.elemHidden) + option.offsetBR);
 										tabs.animate();
 										tabs.setButtonState($prev);
-										return false
+										return false;
 									}
-								})
+								});
 			},
 			animate : function() {
-				if (e.orientation == 'horizontal') {
+				if (option.orientation == 'horizontal') {
 					$tabs.animate({
 						'marginLeft' : -+margin
-					}, e.tabsAnimTime, e.tabsEasing)
+					}, option.tabsAnimTime, option.tabsEasing);
 				} else {
 					$tabs.animate({
 						'marginTop' : -+margin
-					}, e.tabsAnimTime, e.tabsEasing)
+					}, option.tabsAnimTime, option.tabsEasing);
 				}
 			},
 			setButtonState : function(a) {
-				if (e.buttonsFunction == 'click') {
-					$li = $tab.parents('li')
+				if (option.buttonsFunction == 'click') {
+					$li = $tab.parents('li');
 				}
 				if ($li.is(':first-child')) {
 					this.disableButton($prev);
-					this.enableButton($next)
+					this.enableButton($next);
 				} else if ($li.is(':last-child')) {
 					this.disableButton($next);
-					this.enableButton($prev)
+					this.enableButton($prev);
 				} else {
 					if (a) {
-						this.enableButton(a)
-					} else if (e.buttonsFunction == 'click') {
+						this.enableButton(a);
+					} else if (option.buttonsFunction == 'click') {
 						this.enableButton($prev);
-						this.enableButton($next)
+						this.enableButton($next);
 					}
 				}
 			}
-		}, content = {
+		};
+		var content = {
 			animated : '#' + d.attr('id') + ' :animated',
 			showActive : function() {
 				$view = $content.children($activeTab.attr('href')).addClass(
-						e.classViewActive);
+						option.classViewActive);
 				$content.children('div').css('position', 'absolute').show()
-						.not('div.' + e.classViewActive).hide();
-				if (e.autoHeight == true) {
+						.not('div.' + option.classViewActive).hide();
+				if (option.autoHeight == true) {
 					$content.css('height', $view.height()).parent().css(
-							'height', 'auto')
+							'height', 'auto');
 				}
 			},
 			adjustHeight : function() {
-				if (e.autoHeightTime > 0) {
+				if (option.autoHeightTime > 0) {
 					$content.animate({
 						'height' : $view.height()
-					}, e.autoHeightTime)
+					}, option.autoHeightTime);
 				} else {
-					$content.css('height', $view.height())
+					$content.css('height', $view.height());
 				}
 			},
 			fade : function() {
-				$activeView.fadeOut(e.contentAnimTime);
-				$view.fadeIn(e.contentAnimTime)
+				$activeView.fadeOut(option.contentAnimTime);
+				$view.fadeIn(option.contentAnimTime);
 			},
 			fadeOutIn : function() {
-				$activeView.fadeOut(e.contentAnimTime, function() {
-					$view.fadeIn(e.contentAnimTime)
+				$activeView.fadeOut(option.contentAnimTime, function() {
+					$view.fadeIn(option.contentAnimTime);
 				})
 			},
 			slideH : function(a) {
@@ -485,61 +494,62 @@
 				this.setSlideValues(a);
 				$activeView.animate({
 					'left' : a.animVal
-				}, e.contentAnimTime, e.contentEasing);
+				}, option.contentAnimTime, option.contentEasing);
 				$view.css({
 					'display' : 'block',
 					'left' : a.cssVal
 				}).animate({
 					'left' : '0px'
-				}, e.contentAnimTime, e.contentEasing, function() {
+				}, option.contentAnimTime, option.contentEasing, function() {
 					$activeView.css('display', 'none')
-				})
+				});
 			},
 			slideV : function(a) {
 				a.wh = d.outerHeight(true);
 				this.setSlideValues(a);
 				$activeView.animate({
 					'top' : a.animVal
-				}, e.contentAnimTime, e.contentEasing);
+				}, option.contentAnimTime, option.contentEasing);
 				$view.css({
 					'display' : 'block',
 					'top' : a.cssVal
 				}).animate({
 					'top' : '0px'
-				}, e.contentAnimTime, e.contentEasing, function() {
+				}, option.contentAnimTime, option.contentEasing, function() {
 					$activeView.css('display', 'none')
-				})
+				});
 			},
 			setSlideValues : function(a) {
 				if (a.elemP > a.activeElemP[a.obj]) {
 					a.animVal = -a.wh;
-					a.cssVal = a.wh
+					a.cssVal = a.wh;
 				} else {
 					a.animVal = a.wh;
-					a.cssVal = -a.wh
+					a.cssVal = -a.wh;
 				}
 			}
-		}, autoplay = {
+		};
+		var autoplay = {
 			init : function() {
 				val.index = 0;
-				this.setInterval()
+				this.setInterval();
 			},
 			setInterval : function() {
 				this.clearInterval();
 				val.intervalId = setInterval(function() {
-					autoplay.play()
-				}, e.autoplayInterval)
+					autoplay.play();
+				}, option.autoplayInterval);
 			},
 			clearInterval : function() {
-				clearInterval(val.intervalId)
+				clearInterval(val.intervalId);
 			},
 			play : function() {
 				val.index++;
 				if (val.index == $a.length) {
-					val.index = 0
+					val.index = 0;
 				}
-				tabs.click($a[val.index])
+				tabs.click($a[val.index]);
 			}
-		}
+		};
 	}
 })(jQuery);
