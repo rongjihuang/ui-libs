@@ -250,6 +250,7 @@ $.fn.themeswitcher = function(settings){
 
 $.fn.themeswitcher.regional=[];
 $.fn.themeswitcher.regional['zh-CN']={
+	"base": "默 认",
 	"ui-lightness": "明 亮",
 	"ui-darkness": "黑 暗",
 	"smoothness": "平 滑",
@@ -285,7 +286,8 @@ $.fn.themeswitcher.ts="20110515";
  * extra：额外附件的css文件，多个文件用逗号连接
  */
 $.fn.themeswitcher.defaultThemes=[
-	 {name: "ui-lightness",label: "UI lightness",iconImg:"theme_90_ui_light.png"}
+     {name: "base",label: "Base",iconImg:"theme_90_smoothness.png"}
+    ,{name: "ui-lightness",label: "UI lightness",iconImg:"theme_90_ui_light.png"}
 	,{name: "ui-darkness",label: "UI Darkness",iconImg:"theme_90_ui_dark.png"}
 	,{name: "smoothness",label: "Smoothness",iconImg:"theme_90_smoothness.png"}
 	,{name: "start",label: "Start",iconImg:"theme_90_start_menu.png"}
