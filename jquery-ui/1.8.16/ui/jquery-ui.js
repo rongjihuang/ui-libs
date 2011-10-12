@@ -7971,7 +7971,7 @@ $.extend(Datepicker.prototype, {
 						width: inst.dpDiv.outerWidth(), height: inst.dpDiv.outerHeight()});
 				}
 			};
-			inst.dpDiv.zIndex($(input).zIndex()+1);
+			inst.dpDiv.zIndex($(input).zIndex()+10000);
 			$.datepicker._datepickerShowing = true;
 			if ($.effects && $.effects[showAnim])
 				inst.dpDiv.show(showAnim, $.datepicker._get(inst, 'showOptions'), duration, postProcess);
