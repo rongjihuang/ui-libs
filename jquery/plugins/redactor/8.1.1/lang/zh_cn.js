@@ -64,7 +64,7 @@ RELANG['zh_cn'] = {
 	fullscreen: '全屏',
 	deleted: '删除',
 	anchor: '锚点',
-	link_new_tab: 'Open link in new tab',
-	underline: 'Underline',
-	alignment: 'Alignment'
+	link_new_tab: '在新标签页中打开链接',
+	underline: '下划线',
+	alignment: '对齐方式'
 };
