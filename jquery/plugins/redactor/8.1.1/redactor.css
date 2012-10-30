@@ -5,6 +5,7 @@
 }
 .redactor_box, .redactor_box textarea {
 	background-color: #fff;
+	color: #000;
 }
 
 body .redactor_air {
@@ -24,10 +25,11 @@ body .redactor_box_fullscreen {
     top: 0;
     width: 100%;
     z-index: 2000; 
+	color: #000;
 }
 
 .redactor_box textarea {
-	font-family: Menlo, Monaco, monospace, sans-serif;
+	font-family: "微软雅黑", "宋体", Menlo, Monaco, monospace, sans-serif;
 	font-size: 13px;
 	overflow: auto;
 	resize: none;
@@ -43,6 +45,7 @@ body .redactor_box_fullscreen {
 }
 
 .redactor_editor, .redactor_editor:focus {
+	color: #000;
 	position: relative;
 	outline: none;
 	box-shadow: none !important;
@@ -51,7 +54,7 @@ body .redactor_box_fullscreen {
 	background: none;	
 	background: #fff !important;
 	overflow: auto;
-	font-family: Arial, Helvetica, Verdana, Tahoma, sans-serif !important;      
+	font-family: "微软雅黑", "宋体", Arial, Helvetica, Verdana, Tahoma, sans-serif !important;      
 	font-size: 15px !important;
 	line-height: 1.45em !important;	
 	white-space: normal;
@@ -86,7 +89,7 @@ body .redactor_box_fullscreen {
 	margin: 0 !important;
 	margin-bottom: 15px !important;
 	line-height: 1.45em !important;
-	font-family: Arial, Helvetica, Verdana, Tahoma, sans-serif !important;      
+	font-family: "微软雅黑", "宋体", Arial, Helvetica, Verdana, Tahoma, sans-serif !important;      
 	font-size: 15px !important;
 	border: none;	
 }
@@ -131,7 +134,7 @@ body .redactor_box_fullscreen {
 }
 .redactor_editor code, 
 .redactor_editor pre {
-	font-family: Menlo, Monaco, monospace, sans-serif !important;
+	font-family: "微软雅黑", "宋体", Menlo, Monaco, monospace, sans-serif !important;
 }
 .redactor_editor code {
 	background-color: #d8d7d7 !important;
@@ -157,7 +160,7 @@ body .redactor_box_fullscreen {
 .redactor_editor h3, 
 .redactor_editor h4,
 .redactor_editor h5 {
-	font-family: Helvetica, Arial, Verdana, Tahoma, sans-serif !important;
+	font-family: "微软雅黑", "宋体", Helvetica, Arial, Verdana, Tahoma, sans-serif !important;
 	color: #000;
 	background: none;	
 	margin: 0 !important;
@@ -222,7 +225,7 @@ body .redactor_box_fullscreen {
 	TOOLBAR
 */
 .redactor_toolbar {
-	font-family: Helvetica, Arial, Verdana, Tahoma, sans-serif !important; 
+	font-family: "微软雅黑", "宋体", Helvetica, Arial, Verdana, Tahoma, sans-serif !important; 
 	position: relative;
 	left: 0;
 	top: 0;
@@ -372,7 +375,7 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
 	DROPDOWN
 */
 .redactor_dropdown {
-	font-family: Helvetica, Arial, Verdana, Tahoma, sans-serif; 
+	font-family: "微软雅黑", "宋体", Helvetica, Arial, Verdana, Tahoma, sans-serif; 
 	top: 28px;
 	left: 0;
 	z-index: 2004;
@@ -456,7 +459,7 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
 	box-shadow: 0px 5px 60px #000;
   	border-radius: 3px;  	  	  		
   	z-index: 50001;	
-	font-family: Helvetica, Arial, Verdana, Tahoma, sans-serif;      
+	font-family: "微软雅黑", "宋体", Helvetica, Arial, Verdana, Tahoma, sans-serif;      
 	font-size: 12px !important;	
 	color: #000;
 }
@@ -559,7 +562,7 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
 #redactor_modal textarea {
 	position: relative;
 	z-index: 2;
-	font-family: Helvetica, Arial, Tahoma, sans-serif;
+	font-family: "微软雅黑", "宋体", Helvetica, Arial, Tahoma, sans-serif;
 	height: 23px;
 	border: 1px solid #ccc;
 	margin: 0;
@@ -594,7 +597,7 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
 	display: inline-block;
 	text-align: center;
 	text-decoration: none;
-	font-family: Helvetica, Arial, Verdana, Tahoma, sans-serif; 
+	font-family: "微软雅黑", "宋体", Helvetica, Arial, Verdana, Tahoma, sans-serif; 
 	line-height: 1;
 	font-size: 12px;
 	font-weight: normal;
