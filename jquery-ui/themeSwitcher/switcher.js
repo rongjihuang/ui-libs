@@ -275,7 +275,8 @@ $.fn.themeswitcher.regional['zh-CN']={
 	"black-tie": "黑领带",
 	//"trontastic": "",
 	"swanky-purse": "时髦包包",
-	"bootstrap": "Bootstrap"
+	"bootstrap": "Bootstrap",
+	"jMetro": "jMetro"
 };
 /**时间搓*/
 $.fn.themeswitcher.ts="20110515";
@@ -312,7 +313,8 @@ $.fn.themeswitcher.defaultThemes=[
 	,{name: "black-tie",label: "Black Tie",iconImg:"theme_90_black_tie.png"}
 	,{name: "trontastic",label: "Trontastic",iconImg:"theme_90_trontastic.png"}
 	,{name: "swanky-purse",label: "Swanky Purse",iconImg:"theme_90_swanky_purse.png"}
-	,{name: "bootstrap",label: "Bootstrap",iconImg:"theme_90_cupertino.png"}
+	,{name: "bootstrap",label: "Bootstrap",iconImg:"theme_90_bootstrap.png"}
+	,{name: "jMetro",label: "jMetro",iconImg:"theme_90_jMetro.png"}
 ];
 
 //默认的参数配置
