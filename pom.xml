@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>cn.bc.ui</groupId>
+    <artifactId>ui-libs</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>ui-libs</name>
+    <properties>
+        <maven.test.skip>true</maven.test.skip>
+        <jdk.version>1.7</jdk.version>
+ 
+        <!-- jetty 配置 -->
+        <!--Jetty的各种版本：
+            1）9.0+版本 groupId 为 org.eclipse.jetty
+                9.1.2.v20140210,9.1.1.v20140108, 9.0.7.v20131107
+            2）v8及以下版本 groupId 为 org.mortbay.jetty
+                8.1.14.v20131031, 7.6.14.v20131031
+                8.0.4.v20111024, 7.5.4.v20111024 -->
+        <jetty.groupId>org.eclipse.jetty</jetty.groupId>
+        <jetty.version>9.1.2.v20140210</jetty.version>
+        <jetty.path>/ui-libs</jetty.path>
+
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.0.13</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-access</artifactId>
+            <version>1.0.13</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <defaultGoal>package</defaultGoal>
+        <plugins>
+            <!-- compile 插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <!-- jetty 插件 -->
+            <plugin>
+                <groupId>${jetty.groupId}</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.version}</version>
+                <!-- 配置参考：http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html#configuring-jetty-container -->
+                <configuration>
+                    <webAppSourceDirectory>${basedir}</webAppSourceDirectory>
+                    <!--<scanIntervalSeconds>10</scanIntervalSeconds> -->
+                    <webApp>
+                        <!-- The path to the web.xml file -->
+                        <!-- <descriptor>WEB-INF/web.xml</descriptor> -->
+
+                        <!-- Defaults to / -->
+                        <contextPath>${jetty.path}</contextPath>
+
+                        <!-- <defaultsDescriptor>WEB-INF/webdefault.xml</defaultsDescriptor> -->
+                    </webApp>
+                    <httpConnector>
+                        <!-- 修改端口也可：mvn jetty:run -Djetty.port=8081 -->
+                        <port>8081</port>
+                        <idleTimeout>6000</idleTimeout>
+                    </httpConnector>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
