@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8" />
+  <meta charset="utf-8" />
   <title>NBL.js 2.0 Examples</title>
   <script src="nbl.js" data-nbl="['http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js', 'http://www.google-analytics.com/urchin.js', function(){nbl_init_xmp1()}]"></script>
   <script type="text/javascript">
     // <!--
     var nbl_count = 0, mtime = 0;
     function nbl_init_xmp1() {
-			if (typeof jQuery == 'function') {
-				// nbl_xmp1 was called for the first time
-				$( '#result1' ).html( 'nbl_init_xmp1() was fired' ).addClass( 'pos' );
-				$( '#result1a' ).html( 'nbl.q.jquery is ' + nbl.q.jquery ).addClass( (nbl.q.jquery==true)?'pos':'neg' );
-				$( '#result1b' ).html( 'nbl.q.urchin is ' + nbl.q.urchin ).addClass( (nbl.q.urchin==true)?'pos':'neg' );
-			} else {
-				window.setTimeout( nbl_init_xmp1, 250 )
-			}
+      if (typeof jQuery == 'function') {
+        // nbl_xmp1 was called for the first time
+        $( '#result1' ).html( 'nbl_init_xmp1() was fired' ).addClass( 'pos' );
+        $( '#result1a' ).html( 'nbl.q.jquery is ' + nbl.q.jquery ).addClass( (nbl.q.jquery==true)?'pos':'neg' );
+        $( '#result1b' ).html( 'nbl.q.urchin is ' + nbl.q.urchin ).addClass( (nbl.q.urchin==true)?'pos':'neg' );
+      } else {
+        window.setTimeout( nbl_init_xmp1, 250 )
+      }
     }
     function nbl_init_xmp2() {
-			if (typeof $.fn.jcaption == 'function') {
-				// nbl_xmp1 was called for the second time
-				$( '#result2' ).html( 'nbl_inti_xmp2() was fired' ).addClass( 'pos' );
-				$( '#result2a' ).html( 'nbl.q.jcaption is ' + nbl.q.jcaption ).addClass( (nbl.q.jcaption)?'pos':'neg' );
-				$( "#photo-xmp2" ).jcaption({copyStyle: true, animate: true, show: {height: "show"}, hide: {height: "hide"}});
-			}	 else {
-				window.setTimeout( nbl_init_xmp2, 250 )
-			}
+      if (typeof $.fn.jcaption == 'function') {
+        // nbl_xmp1 was called for the second time
+        $( '#result2' ).html( 'nbl_inti_xmp2() was fired' ).addClass( 'pos' );
+        $( '#result2a' ).html( 'nbl.q.jcaption is ' + nbl.q.jcaption ).addClass( (nbl.q.jcaption)?'pos':'neg' );
+        $( "#photo-xmp2" ).jcaption({copyStyle: true, animate: true, show: {height: "show"}, hide: {height: "hide"}});
+      }   else {
+        window.setTimeout( nbl_init_xmp2, 250 )
+      }
     }
     function clk_xmp2() {
       nbl.l(['http://files.www.gethifi.com/posts/jcaption/jcaption.min.js', function(){nbl_init_xmp2()}]);
@@ -34,8 +34,8 @@
     function clk_xmp3() {
       mtime = (new Date()).getTime();
       nbl.l([
-				3500, function(e){nbl_init_xmp3(e)}, 
-				'http://github.com/vitch/jquery-methods/raw/master/date.js', [ 'http://www.kelvinluck.com/assets/jquery/datePicker/v2/demo/scripts/jquery.datePicker.js', 'Non-existent URL' ]
+        3500, function(e){nbl_init_xmp3(e)}, 
+        'http://github.com/vitch/jquery-methods/raw/master/date.js', [ 'http://www.kelvinluck.com/assets/jquery/datePicker/v2/demo/scripts/jquery.datePicker.js', 'Non-existent URL' ]
       ]);
       return false;
     }
@@ -60,9 +60,9 @@
     body { font-family: Georgia, serif; line-height: 1.5; }
     #container { position: relative; margin: 1em auto 2em; padding: 4em; width: 48em; background: #def; border-radius: 0.5em; box-shadow: 0 0.5em 0.5em #888; -moz-box-shadow: 0 0.5em 0.5em #888; -webkit-box-shadow: 0 0.5em 0.5em #888; }
     h1, h2 { font-family: Futura, "Century Gothic", AppleGothic, sans-serif; }
-		h1 { font-size: 400%; margin: 0; color: #678; text-shadow: 1px 1px 1px #fff; text-shadow: -1px -1px 1px #345; }
-		h2 { margin-top: 2em; }
-		h2.sub { margin: 0.5em; ;text-align: center; font-style: italic; font-weight: normal; color: #567; }
+    h1 { font-size: 400%; margin: 0; color: #678; text-shadow: 1px 1px 1px #fff; text-shadow: -1px -1px 1px #345; }
+    h2 { margin-top: 2em; }
+    h2.sub { margin: 0.5em; ;text-align: center; font-style: italic; font-weight: normal; color: #567; }
     h3 em { font-weight: normal; }
     hr { margin-bottom: 2em; height: 0; border: none; border-bottom: 1px solid #bcd; }
     em { color: #bcd; }
@@ -70,9 +70,9 @@
     .neg { color: red; }
     .hidden { display: none; }
     .center { margin-top: 0; text-align: center; }
-		/* For the image caption example */
-		.caption.none { position: relative; margin: auto; }
-		.caption.none p { position: absolute; margin: 0 auto; width: 100%; top: 0; right: 0; color: white; background-color: rgba( 255, 255, 255, 0.25 ); }
+    /* For the image caption example */
+    .caption.none { position: relative; margin: auto; }
+    .caption.none p { position: absolute; margin: 0 auto; width: 100%; top: 0; right: 0; color: white; background-color: rgba( 255, 255, 255, 0.25 ); }
     /* For the Date-picker example */
     div.dp-popup { position: relative; background: #ccc; font-size: 10px; font-family: arial, sans-serif; padding: 2px; width: 171px; line-height: 1.2em; }
     div#dp-popup { position: absolute; z-index: 199; }
@@ -107,18 +107,18 @@
     <!-- Example 1 -->
     <div>
       <h2>Example 1:</h2>
-			<p>Loading 2 (or more) scripts asynchronously:</p>
+      <p>Loading 2 (or more) scripts asynchronously:</p>
       <pre><code>
 &lt;script src="nbl.min.js" data-nbl="[
   'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js',
   'http://www.google-analytics.com/urchin.js', 
   function(){nbl_init_xmp1()}
 ]"&gt;&lt;/script&gt;
-			</code></pre>
+      </code></pre>
       <p>
         By including this script tag in the head element of this document, 
-				NBL.js will dynamically load jQuery from the first url and Urchin 
-				from the second url in parallel.
+        NBL.js will dynamically load jQuery from the first url and Urchin 
+        from the second url in parallel.
       </p>
       <h3>Result: <em id="result1">loading&hellip;</em></h3>
       <ul>
@@ -127,9 +127,9 @@
       </ul>
       <p>
         The <code>nbl_init_xmp1()</code> function will fire when it has 
-				completed loading the second script or when the default timeout has 
-				been reached. If you change the position of the function in the 
-				options like this:
+        completed loading the second script or when the default timeout has 
+        been reached. If you change the position of the function in the 
+        options like this:
       </p>
       <pre><code>
 &lt;script src="nbl.min.js" data-nbl="[
@@ -137,14 +137,14 @@
   function(){nbl_xmp1()},
   'http://www.google-analytics.com/urchin.js'
 ]"&gt;&lt;/script&gt;
-			</code></pre>
+      </code></pre>
       <p>
         Then <code>nbl_init_xmp1()</code> will fire when it has 
-				completed loading the first script. Basically, any function after
-				a script url will be fired when that script has loaded successfully.
-				You're free to declare a function after every script you load, but 
-				keep in mind only the first function you declare will fire in case 
-				of a timeout.
+        completed loading the first script. Basically, any function after
+        a script url will be fired when that script has loaded successfully.
+        You're free to declare a function after every script you load, but 
+        keep in mind only the first function you declare will fire in case 
+        of a timeout.
       </p>
       <hr />
     </div>
@@ -153,9 +153,9 @@
       <h2>Example 2:</h2>
       <p>
         NBL is now resident, and we can load a new script at any time. 
-				Simply call:<br /> <code>nbl.l(['url', function(){nbl_init_xmp2()}])</code> 
-				and a new script shall be loaded. After completion the <code>nbl_init_xmp2()</code> 
-				function will fire.
+        Simply call:<br /> <code>nbl.l(['url', function(){nbl_init_xmp2()}])</code> 
+        and a new script shall be loaded. After completion the <code>nbl_init_xmp2()</code> 
+        function will fire.
       </p>
       <p class="center">
         <a href="#" onclick="return clk_xmp2();">Click here</a> to add the jCaption jQuery plugin script to this page.
@@ -164,12 +164,12 @@
       <ul>
         <li>jCaption loaded: <em id="result2a">click first&hellip;</em></li>
       </ul>
-			<p class="center">
-				<img id="photo-xmp2" alt="A view of Shinjuku, Tokyo." src="http://farm3.static.flickr.com/2787/4039125445_a2ce41cc69.jpg" />
-			</p>
+      <p class="center">
+        <img id="photo-xmp2" alt="A view of Shinjuku, Tokyo." src="http://farm3.static.flickr.com/2787/4039125445_a2ce41cc69.jpg" />
+      </p>
       <p>
         After you've clicked the link, the photo should now have a nice caption 
-				courtesy of the jCaption plugin.
+        courtesy of the jCaption plugin.
       </p>
       <hr />
     </div>
@@ -203,10 +203,10 @@ nbl.l([ 3500, function(){nbl_init_xmp3()},
       </ul>
       <p>
         Alright, what happened here? First off, jQuery Date Picker and the Date script should load just fine. But Plugin 2 
-				(the Non-existent URL) should fail to load immediately. This will cause NBL's timeout to go into effect, which we 
-				specified to be 3500ms. So the above results should come into view 3.5 seconds after clicking. Plugin 2 will return 
-				the script object with the faulty url still in its src attribute. Furthermore, the timeout function will be called 
-				with the <code>nbl.q</code> object as its argument <code>e</code>, indicating there were errors.
+        (the Non-existent URL) should fail to load immediately. This will cause NBL's timeout to go into effect, which we 
+        specified to be 3500ms. So the above results should come into view 3.5 seconds after clicking. Plugin 2 will return 
+        the script object with the faulty url still in its src attribute. Furthermore, the timeout function will be called 
+        with the <code>nbl.q</code> object as its argument <code>e</code>, indicating there were errors.
       </p>
       <p>
         I'll wait for Date and Plugin 1 to have loaded before showing you the date-picker link. The link should appear here: 
@@ -227,7 +227,7 @@ nbl.l([ 3500, function(){nbl_init_xmp3()},
       </p>
       <ul>
         <li>John Resig's (and the jQuery team's) jQuery: <a href="http://www.jquery.com/">jQuery</a></li>
-				<li>Joel Sutherland's jCaption plugin: <a href="http://www.gethifi.com/blog/jcaption-a-jquery-plugin-for-simple-image-captions">jCaption</a></li>
+        <li>Joel Sutherland's jCaption plugin: <a href="http://www.gethifi.com/blog/jcaption-a-jquery-plugin-for-simple-image-captions">jCaption</a></li>
         <li>Kelvin Luck's jQuery Date picker plugin: <a href="http://www.kelvinluck.com/assets/jquery/datePicker/v2/demo/">Date picker v2</a></li>
         <li>Jörn Zaefferer, Brandon Aaron and Kelvin Luck's Date methods: <a href="http://github.com/vitch/jquery-methods/">date.js</a></li>
         <li>Google Analytics' Urchin script: <a href="http://www.google.com/analytics/">Google Analytics</a></li>
