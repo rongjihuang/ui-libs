@@ -15988,3 +15988,10 @@ var Vue = (function (exports) {
   return exports;
 
 }({}));
+
+// support requirejs - Add by RJ 2022-10-26
+if (typeof define === "function" && define.amd) {
+  define("vue3", [], function () {
+    return Vue;
+  });
+}
